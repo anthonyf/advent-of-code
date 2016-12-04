@@ -7,9 +7,10 @@
                          [[a d g]
                           [b e h]
                           [c f i]])
-                  (partition 3 d3.1/triangles)))
+                       (partition 3 d3.1/triangles)))
 
-#_ triangles
+#_ (take 4 triangles)
+;; => ([330 769 930] [143 547 625] [338 83 317] [669 15 662])
 
 (defn solve
   []
@@ -21,3 +22,4 @@
           triangles))
 
 #_ (solve)
+;; => 1649

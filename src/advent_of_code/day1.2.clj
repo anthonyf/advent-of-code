@@ -1,5 +1,5 @@
 (ns advent-of-code.day1.2
-  (:require [advent-of-code.day1 :as d1]))
+  (:require [advent-of-code.day1.1 :as d1]))
 
 (defn explode-instruction
   [[facing spaces :as inst]]
@@ -11,12 +11,10 @@
     [inst]))
 
 #_ (explode-instruction [:left 4])
-#_ (explode-instruction d1/instuctions)
+;; => ([:left 1] [:forward 1] [:forward 1] [:forward 1])
 
 (def instructions (mapcat explode-instruction
                           d1/instructions))
-
-#_ (str (vec instructions))
 
 (def new-facing {:north {:left :west
                          :right :east
@@ -54,3 +52,4 @@
        (Math/abs y))))
 
 #_ (solve)
+;; => 79

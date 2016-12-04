@@ -10,8 +10,10 @@
      :sector-id (Integer/parseInt sector-id)
      :checksum checksum}))
 
-(def data (map parse-line
-               (line-seq (BufferedReader. (StringReader. raw-data)))))
+(defn parse-data
+  [raw-data]
+  (map parse-line
+       (line-seq (BufferedReader. (StringReader. raw-data)))))
 
 (defn frequencies
   [name]
@@ -23,6 +25,7 @@
           name))
 
 #_ (frequencies "vxupkizork-sgmtkzoi-pkrrehkgt-zxgototm-")
+;; => {\e 1, \g 3, \h 1, \i 2, \k 5, \- 4, \m 2, \o 4, \p 2, \r 3, \s 1, \t 4, \u 1, \v 1, \x 2, \z 3}
 
 
 (defn valid-checksum?
@@ -38,8 +41,11 @@
            0 5)))
 
 #_ (valid-checksum? (parse-line "aaaaa-bbb-z-y-x-123[abxyz]"))
+;; => true
 #_ (valid-checksum? (parse-line "not-a-real-room-404[oarel]"))
+;; => true
 #_ (valid-checksum? (parse-line "totally-real-room-200[decoy]"))
+;; => false
 
 
 (defn solve
@@ -49,9 +55,9 @@
               (+ sum sector-id)
               sum))
           0
-          data))
+          (parse-data raw-data)))
 
-#+ (solve)
+#_ (solve)
 ;; => 137896
 
 (def raw-data

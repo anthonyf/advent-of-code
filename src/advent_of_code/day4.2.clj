@@ -12,6 +12,11 @@
              (int \a)))))
 
 #_ (rotate-char \-)
+;; => \space
+#_ (rotate-char \a)
+;; => \b
+#_ (rotate-char \z)
+;; => \a
 
 (defn shift-name
   [name]
@@ -19,6 +24,7 @@
                   name)))
 
 #_ (shift-name "ab-vz")
+;; => "bc wa"
 
 (defn decrypt-room
   [{:keys [name sector-id _] :as line}]
@@ -28,6 +34,7 @@
                                  (range sector-id))))
 
 #_ (decrypt-room (day4.1/parse-line "qzmt-zixmtkozy-ivhz-343[asdsf]"))
+;; => {:name "qzmt-zixmtkozy-ivhz-", :sector-id 343, :checksum "asdsf", :decrypted "very encrypted name "}
 
 
 (defn solve []

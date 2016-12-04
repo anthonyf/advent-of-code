@@ -9,6 +9,7 @@
        (> (+ c a) b)))
 
 #_ (triangle? 5 10 25)
+;; => false
 
 (defn solve
   []
@@ -20,6 +21,7 @@
           triangles))
 
 #_ (solve)
+;; => 917
 
 (def triangles [[330  143  338]
                 [769  547   83]

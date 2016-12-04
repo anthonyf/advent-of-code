@@ -20,6 +20,7 @@
       [x y])))
 
 #_ (move [0 2] \U)
+;; => [0 2]
 
 (defn key [[[x y] keys] input]
   (let [[x y] (reduce move
@@ -28,7 +29,9 @@
     [[x y] (conj keys (get-in keypad [y x]))]))
 
 #_ (key [[0 2] []] (vec "R"))
+;; => [[1 2] [6]]
 #_ (key [[0 2] []] (vec "ULL"))
+;; => [[0 2] [5]]
 
 (defn solve []
   (second (reduce key
@@ -36,3 +39,4 @@
                   d2.1/input)))
 
 #_ (solve)
+;; => [6 B B A D]
