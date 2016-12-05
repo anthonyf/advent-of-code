@@ -1,5 +1,5 @@
-(ns advent-of-code.day2.2
-  (:require [advent-of-code.day2.1 :as d2.1]))
+(ns advent-of-code.2016.day2-2
+  (:require [advent-of-code.2016.day2-1 :as d2-1]))
 
 (def keypad '[[_ _ 1 _ _]
               [_ 2 3 4 _]
@@ -36,7 +36,7 @@
 (defn solve []
   (second (reduce key
                   [[0 2] []]
-                  d2.1/input)))
+                  d2-1/input)))
 
 #_ (solve)
 ;; => [6 B B A D]

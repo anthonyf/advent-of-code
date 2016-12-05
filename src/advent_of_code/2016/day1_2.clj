@@ -1,5 +1,5 @@
-(ns advent-of-code.day1.2
-  (:require [advent-of-code.day1.1 :as d1]))
+(ns advent-of-code.2016.day1-2
+  (:require [advent-of-code.2016.day1-1 :as d1]))
 
 (defn explode-instruction
   [[facing spaces :as inst]]

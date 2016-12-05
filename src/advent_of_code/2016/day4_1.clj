@@ -1,4 +1,4 @@
-(ns advent-of-code.day4.1
+(ns advent-of-code.2016.day4-1
   (:import (java.io BufferedReader StringReader)))
 
 (declare raw-data)

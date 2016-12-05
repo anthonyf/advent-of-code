@@ -1,5 +1,5 @@
-(ns advent-of-code.day4.2
-  (:require [advent-of-code.day4.1 :as day4.1]))
+(ns advent-of-code.2016.day4.2
+  (:require [advent-of-code.2016.day4-1 :as day4-1]))
 
 (defn rotate-char
   [c]
@@ -33,7 +33,7 @@
                                  name
                                  (range sector-id))))
 
-#_ (decrypt-room (day4.1/parse-line "qzmt-zixmtkozy-ivhz-343[asdsf]"))
+#_ (decrypt-room (day4-1/parse-line "qzmt-zixmtkozy-ivhz-343[asdsf]"))
 ;; => {:name "qzmt-zixmtkozy-ivhz-", :sector-id 343, :checksum "asdsf", :decrypted "very encrypted name "}
 
 
@@ -45,11 +45,11 @@
           nil
           (map decrypt-room
                (reduce (fn [valid {:keys [name sector-id checksum] :as line}]
-                         (if (day4.1/valid-checksum? line)
+                         (if (day4-1/valid-checksum? line)
                            (conj valid line)
                            valid))
                        []
-                       day4.1/data))))
+                       (day4-1/parse-data day4-1/raw-data)))))
 
 #_ (solve)
 ;; => 501

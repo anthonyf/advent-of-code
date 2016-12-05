@@ -1,4 +1,4 @@
-(ns advent-of-code.day1.1
+(ns advent-of-code.2016.day1-1
   (:require [clojure.string :as str]))
 
 (declare instructions)
