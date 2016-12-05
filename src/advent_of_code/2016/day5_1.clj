@@ -42,6 +42,7 @@
         (recur (inc i))))))
 
 #_ (find-digit "abc" 0)
+;; => ["1" 3231930]
 
 (defn solve
   [input]
