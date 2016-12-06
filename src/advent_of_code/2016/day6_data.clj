@@ -1,5 +1,22 @@
 (ns advent-of-code.2016.day6-data)
 
+(def sample-data "eedadn
+drvtee
+eandsr
+raavrd
+atevrs
+tsrnev
+sdttsa
+rasrtv
+nssdts
+ntnada
+svetve
+tesnvt
+vntsnd
+vrdear
+dvrsen
+enarar")
+
 (def raw-data "hgxcejbh
 xllyqcqh
 wfbuksyy

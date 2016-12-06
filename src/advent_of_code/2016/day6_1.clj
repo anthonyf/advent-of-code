@@ -29,9 +29,11 @@
 
 (defn most-freq-for-column
   [pos-letter-freqs pos]
-  (first
-   (first
-    (reverse (sort-by second (get pos-letter-freqs pos))))))
+  (let [[[letter freq] & _] (reverse
+                             (sort-by second (get pos-letter-freqs pos)))]
+    letter))
+
+(most-freq-for-column (pos-letter-freqs d/sample-data) 0)
 
 (defn solve [raw-data]
   (let [pos-letter-freqs (pos-letter-freqs raw-data)
@@ -40,22 +42,7 @@
                       (most-freq-for-column pos-letter-freqs n))
                     (range num-letters)))))
 
-#_ (solve "eedadn
-drvtee
-eandsr
-raavrd
-atevrs
-tsrnev
-sdttsa
-rasrtv
-nssdts
-ntnada
-svetve
-tesnvt
-vntsnd
-vrdear
-dvrsen
-enarar")
+#_ (solve d/sample-data)
 ;; => "easter"
 
 #_ (solve d/raw-data)
