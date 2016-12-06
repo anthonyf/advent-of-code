@@ -21,9 +21,42 @@
 ;; => {0 {\h 1}, 1 {\e 1}, 2 {\l 1}, 3 {\l 1}, 4 {\o 1}}
 
 
+(defn pos-letter-freqs
+  [raw-data]
+  (reduce collect-letters
+          {}
+          (u/string-line-seq raw-data)))
 
-#_ (map (fn [[k v]]
-          (println k v))
-        (reduce collect-letters
-                {}
-                (u/string-line-seq d/raw-data)))
+(defn most-freq-for-column
+  [pos-letter-freqs pos]
+  (first
+   (first
+    (reverse (sort-by second (get pos-letter-freqs pos))))))
+
+(defn solve [raw-data]
+  (let [pos-letter-freqs (pos-letter-freqs raw-data)
+        num-letters (count pos-letter-freqs)]
+    (apply str (map (fn [n]
+                      (most-freq-for-column pos-letter-freqs n))
+                    (range num-letters)))))
+
+#_ (solve "eedadn
+drvtee
+eandsr
+raavrd
+atevrs
+tsrnev
+sdttsa
+rasrtv
+nssdts
+ntnada
+svetve
+tesnvt
+vntsnd
+vrdear
+dvrsen
+enarar")
+;; => "easter"
+
+#_ (solve d/raw-data)
+;; => "kjxfwkdh"
