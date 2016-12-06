@@ -1,5 +1,5 @@
 (ns advent-of-code.2016.day4-1
-  (:import (java.io BufferedReader StringReader)))
+  (:require [advent-of-code.utils :as u]))
 
 (declare raw-data)
 
@@ -13,7 +13,7 @@
 (defn parse-data
   [raw-data]
   (map parse-line
-       (line-seq (BufferedReader. (StringReader. raw-data)))))
+       (u/string-line-seq raw-data)))
 
 (defn frequencies
   [name]

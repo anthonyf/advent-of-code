@@ -1,6 +1,6 @@
 (ns advent-of-code.2015.day2-1
-  (:require [advent-of-code.2015.day2-data :as d])
-  (:import (java.io BufferedReader StringReader)))
+  (:require [advent-of-code.2015.day2-data :as d]
+            [advent-of-code.utils :as u]))
 
 #_ (re-matches #" *(\d+)x(\d+)x(\d+)" "22x29x19")
 ;; => ["22x29x19" "22" "29" "19"]
@@ -32,7 +32,7 @@
 ;; => 43
 
 (def data (map parse-line
-               (line-seq (BufferedReader. (StringReader. d/data)))))
+               (u/string-line-seq d/data)))
 
 (defn solve []
   (reduce (fn [sum [l w h]]
