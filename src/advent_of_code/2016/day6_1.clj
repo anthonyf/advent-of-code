@@ -1,6 +1,7 @@
 (ns advent-of-code.2016.day6-1
   (:require [advent-of-code.utils :as u]
-            [advent-of-code.2016.day6-data :as d]))
+            [advent-of-code.2016.day6-data :as d]
+            [clojure.string :as str]))
 
 (defn collect-letter
   [letters pos letter]
@@ -25,7 +26,7 @@
   [raw-data]
   (reduce collect-letters
           {}
-          (u/string-line-seq raw-data)))
+          (str/split-lines raw-data)))
 
 (defn most-freq-for-column
   [pos-letter-freqs pos]

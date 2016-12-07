@@ -1,5 +1,5 @@
 (ns advent-of-code.2016.day4-1
-  (:require [advent-of-code.utils :as u]))
+  (:require [clojure.string :as str]))
 
 (declare raw-data)
 
@@ -13,7 +13,7 @@
 (defn parse-data
   [raw-data]
   (map parse-line
-       (u/string-line-seq raw-data)))
+       (str/split-lines raw-data)))
 
 (defn frequencies
   [name]
