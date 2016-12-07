@@ -6,12 +6,12 @@
 
 (defn parse-line
   [line]
-  (let [non-hyper (set (str/split line
-                                  #"\[[a-z]*\]"))]
-    [non-hyper
+  (let [supernet (set (str/split line
+                                 #"\[[a-z]*\]"))]
+    [supernet
      (set/difference (set (str/split line
                                      #"[\[\]]"))
-                     non-hyper)]))
+                     supernet)]))
 
 #_ (parse-line "xdsqxnovprgovwzkus[fmadbfsbqwzzrzrgdg]aeqornszgvbizdm")
 
@@ -44,9 +44,9 @@
 ;; => true
 
 (defn tls?
-  [non-hyper hyper]
-  (true? (and (some abba? non-hyper)
-              (not-any? abba? hyper))))
+  [supernet hypernet]
+  (true? (and (some abba? supernet)
+              (not-any? abba? hypernet))))
 
 #_ (apply tls? (parse-line "xdsqxnovprgovwzkus[fmadbfsbqwzzrzrgdg]aeqornszgvbizdm"))
 ;; => false
