@@ -14,8 +14,10 @@
                      supernet)]))
 
 #_ (parse-line "xdsqxnovprgovwzkus[fmadbfsbqwzzrzrgdg]aeqornszgvbizdm")
+;; => [#{"aeqornszgvbizdm" "xdsqxnovprgovwzkus"} #{"fmadbfsbqwzzrzrgdg"}]
 
 #_ (parse-line "itgslvpxoqqakli[arktzcssgkxktejbno]wsgkbwwtbmfnddt[zblrboqsvezcgfmfvcz]iwyhyatqetsreeyhh")
+;; => [#{"wsgkbwwtbmfnddt" "itgslvpxoqqakli" "iwyhyatqetsreeyhh"} #{"arktzcssgkxktejbno" "zblrboqsvezcgfmfvcz"}]
 
 (defn maplist [f col]
   (loop [acc []
