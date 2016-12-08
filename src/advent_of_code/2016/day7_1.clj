@@ -19,25 +19,16 @@
 #_ (parse-line "itgslvpxoqqakli[arktzcssgkxktejbno]wsgkbwwtbmfnddt[zblrboqsvezcgfmfvcz]iwyhyatqetsreeyhh")
 ;; => [#{"wsgkbwwtbmfnddt" "itgslvpxoqqakli" "iwyhyatqetsreeyhh"} #{"arktzcssgkxktejbno" "zblrboqsvezcgfmfvcz"}]
 
-(defn maplist [f col]
-  (loop [acc []
-         col col]
-    (if (empty? col)
-      acc
-      (do (f col)
-          (recur (conj acc col)
-                 (drop 1 col))))))
-
 (defn abba?
   [s]
-  (reduce (fn [abba? [a b c d & _]]
+  (reduce (fn [_ [a b c d & _]]
             (if (and (= a d)
                      (= b c)
                      (not= a b))
               (reduced true)
               false))
           false
-          (maplist identity s)))
+          (u/maplist identity s)))
 
 #_ (abba? "abba")
 ;; => true
