@@ -3,7 +3,7 @@
 
 
 (defn solve []
-  (d1/count-safe d1/data 400000))
+  (d1/safe-traps d1/data 400000))
 
 #_ (solve)
 ;; => 20000795

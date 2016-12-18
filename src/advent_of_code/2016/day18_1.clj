@@ -24,27 +24,32 @@
 
 #_ (prev-row-traps (vec "..^^.") 4)
 
-(defn traps
-  [s total-rows]
-  (reduce (fn [rows row-index]
-            (conj rows
-                  (reduce (fn [row i]
-                            (assoc row i (trap (rows (dec row-index))
-                                               i)))
-                          (vec (repeat (count s) \.))
-                          (range (count s)))))
-          [(vec s)]
-          (range 1 total-rows)))
+(defn row-safe-count
+  [row]
+  (reduce (fn [sum c]
+            (+ sum (case c
+                     \. 1
+                     \^ 0)))
+          0
+          row))
 
-(defn count-safe
+#_ (row-safe-count "..^^.")
+;; => 3
+
+(defn safe-traps
   [s total-rows]
-  (let [traps (traps s total-rows)]
-    (reduce (fn [sum c]
-              (+ sum (case c
-                       \. 1
-                       \^ 0)))
-            0
-            (flatten traps))))
+  (first
+   (reduce (fn [[safe-count prev-row] row-index]
+             (let [row (reduce (fn [row i]
+                                 (assoc row i (trap prev-row
+                                                    i)))
+                               (vec (repeat (count s) \.))
+                               (range (count s)))]
+               [(+ safe-count (row-safe-count row))
+                row]))
+           [(row-safe-count s) (vec s)]
+           (range 1 total-rows))))
+
 
 (defn solve
   []
@@ -52,7 +57,7 @@
         #_ ".^^.^.^^^^"
         data
         total-rows #_ 3 #_ 10 40]
-    (count-safe s total-rows)))
+    (safe-traps s total-rows)))
 
 #_ (solve)
 ;; => 1961
