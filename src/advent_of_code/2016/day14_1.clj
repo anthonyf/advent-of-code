@@ -1,24 +1,25 @@
 (ns advent-of-code.2016.day14-1
   (:require [digest :refer [md5]]))
 
-(def salt "abc")
+(def salt "ahsbgdzn"
+  #_ "abc")
 
-(defn triples
+(defn triple
   [s]
   (first
-   (reduce (fn [[triples l] c]
+   (reduce (fn [[triple l] c]
              (let [l (if (or (empty? l)
                              (= (first l) c))
                        (conj l c)
                        [c])]
                (if (>= (count l) 3)
-                 [(conj triples c) l]
-                 [triples l])))
-           [#{} []]
+                 (reduced [c nil])
+                 [triple l])))
+           [nil []]
            s)))
 
-#_ (triples "asdfwisssaasdf777")
-;; => #{\s \7}
+#_ (triple "asdfwwwisssaasdf777")
+;; => \w
 
 (defn five-of-a-kind?
   [s cc]
@@ -37,14 +38,9 @@
 ;; => true
 
 (defn next-1000-hashes-has-five-of-a-kind
-  [triples i]
+  [c i]
   (reduce (fn [_ [i md5]]
-            (if (reduce (fn [_ c]
-                          (if (five-of-a-kind? md5 c)
-                            (reduced true)
-                            false))
-                        false
-                        triples)
+            (if (five-of-a-kind? md5 c)
               (reduced true)
               false))
           false
@@ -54,9 +50,9 @@
 (defn key
   [n]
   (reduce (fn [key [i md5]]
-            (let [triples (triples md5)
-                  key (if (and (not (empty? triples))
-                               (not (next-1000-hashes-has-five-of-a-kind (triples md5)                                                                         (inc i))))
+            (let [triple (triple md5)
+                  key (if (and (not (nil? triple))
+                               (next-1000-hashes-has-five-of-a-kind triple (inc i)))
                         (do (println key i md5)
                             (inc key))
                         key)]
@@ -67,4 +63,8 @@
           (map (fn [i] [i (md5 (str salt i))])
                (range))))
 
-#_ (key 64)
+(defn solve []
+  (key 64))
+
+#_ (solve)
+;; => 23890
