@@ -51,13 +51,14 @@
            (range 1 total-rows))))
 
 
+#_ (safe-traps "..^^." 3)
+;; => 6
+#_ (safe-traps ".^^.^.^^^^" 10)
+;; => 38
+
 (defn solve
   []
-  (let [s #_ "..^^."
-        #_ ".^^.^.^^^^"
-        data
-        total-rows #_ 3 #_ 10 40]
-    (safe-traps s total-rows)))
+  (safe-traps data 40))
 
 #_ (solve)
 ;; => 1961
