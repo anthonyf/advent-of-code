@@ -1,12 +1,11 @@
-(ns advent-of-code.2016.day-19-1
-  (:require [clojure.data.finger-tree :as ft]))
+(ns advent-of-code.2016.day-19-1)
 
 (defn step
   [circle]
-  (conj (rest (rest circle))
+  (conj (subvec circle 2)
         (first circle)))
 
-#_ (-> (apply ft/counted-double-list (range 1 (inc 5)))
+#_ (-> [1 2 3 4 5]
        step
        step
        step
@@ -15,7 +14,7 @@
 
 (defn exchange-presents
   [number-of-elves]
-  (loop [elves (apply ft/counted-double-list (range 1 (inc number-of-elves)))]
+  (loop [elves (vec (range 1 (inc number-of-elves)))]
     (if (= (count elves) 1)
       (first elves)
       (recur (step elves)))))
