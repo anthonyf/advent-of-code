@@ -1,5 +1,5 @@
-(ns advent-of-code.2016.day9-1
-  (:require [advent-of-code.2016.day9-data :as d]
+(ns advent-of-code.2016.day-09-1
+  (:require [advent-of-code.2016.day-09-data :as d]
             [clojure.string :as str]))
 
 (defn decompress

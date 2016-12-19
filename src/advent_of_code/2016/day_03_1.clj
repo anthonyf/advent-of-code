@@ -1,4 +1,4 @@
-(ns advent-of-code.2016.day3-1)
+(ns advent-of-code.2016.day-03-1)
 
 (declare triangles)
 

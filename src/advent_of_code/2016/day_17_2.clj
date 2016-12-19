@@ -1,5 +1,5 @@
 (ns advent-of-code.2016.day17-2
-  (:require [advent-of-code.2016.day17-1 :as d1]))
+  (:require [advent-of-code.2016.day-17-1 :as d1]))
 
 
 (defn longest-path-length

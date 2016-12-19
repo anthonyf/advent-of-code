@@ -1,4 +1,4 @@
-(ns advent-of-code.2016.day5-2
+(ns advent-of-code.2016.day-05-2
   (:require [advent-of-code.2016.day5-1 :as d51]))
 
 (defn seventh-digit

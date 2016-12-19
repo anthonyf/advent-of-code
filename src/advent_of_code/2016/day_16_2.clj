@@ -1,5 +1,5 @@
-(ns advent-of-code.2016.day16-2
-  (:require [advent-of-code.2016.day16-1 :as d1]))
+(ns advent-of-code.2016.day-16-2
+  (:require [advent-of-code.2016.day-16-1 :as d1]))
 
 (defn solve
   []

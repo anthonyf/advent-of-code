@@ -1,7 +1,7 @@
-(ns advent-of-code.2016.day7-2
+(ns advent-of-code.2016.day-07-2
   (:require [advent-of-code.utils :as u]
-            [advent-of-code.2016.day7-data :as d]
-            [advent-of-code.2016.day7-1-data :as d7]))
+            [advent-of-code.2016.day-07-data :as d]
+            [advent-of-code.2016.day-07-1-data :as d7]))
 
 
 (defn aba-acc

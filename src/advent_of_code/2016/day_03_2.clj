@@ -1,5 +1,5 @@
-(ns advent-of-code.2016.day3-2
-  (:require [advent-of-code.2016.day3-1 :as d3-1]))
+(ns advent-of-code.2016.day-03-2
+  (:require [advent-of-code.2016.day-03-1 :as d3-1]))
 
 (def triangles (mapcat (fn [[[a b c]
                              [d e f]

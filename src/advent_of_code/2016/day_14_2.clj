@@ -1,6 +1,6 @@
-(ns advent-of-code.2016.day14-2
+(ns advent-of-code.2016.day-14-2
   (:require [digest :refer [md5]]
-            [advent-of-code.2016.day14-1 :as d1]))
+            [advent-of-code.2016.day-14-1 :as d1]))
 
 (defn stretch-hash
   [salt i]

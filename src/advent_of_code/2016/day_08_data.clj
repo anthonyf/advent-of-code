@@ -1,4 +1,4 @@
-(ns advent-of-code.2016.day8-data)
+(ns advent-of-code.2016.day-08-data)
 
 (def raw-data "rect 1x1
 rotate row y=0 by 10

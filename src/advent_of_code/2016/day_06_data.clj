@@ -1,4 +1,4 @@
-(ns advent-of-code.2016.day6-data)
+(ns advent-of-code.2016.day-06-data)
 
 (def sample-data "eedadn
 drvtee

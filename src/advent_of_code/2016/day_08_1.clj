@@ -1,5 +1,5 @@
-(ns advent-of-code.2016.day8-1
-  (:require [advent-of-code.2016.day8-data :as d]
+(ns advent-of-code.2016.day-08-1
+  (:require [advent-of-code.2016.day-08-data :as d]
             [clojure.string :as str]))
 
 (defn parse-command

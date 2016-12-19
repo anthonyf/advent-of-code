@@ -1,4 +1,4 @@
-(ns advent-of-code.2016.day4-1
+(ns advent-of-code.2016.day-04-1
   (:require [clojure.string :as str]))
 
 (declare raw-data)

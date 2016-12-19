@@ -1,4 +1,4 @@
-(ns advent-of-code.2016.day5-1
+(ns advent-of-code.2016.day-05-1
   (:import (java.security MessageDigest)))
 
 (defn md5sum

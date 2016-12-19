@@ -1,5 +1,5 @@
-(ns advent-of-code.2016.day4.2
-  (:require [advent-of-code.2016.day4-1 :as day4-1]))
+(ns advent-of-code.2016.day-04.2
+  (:require [advent-of-code.2016.day-04-1 :as day4-1]))
 
 (defn rotate-char
   [c]

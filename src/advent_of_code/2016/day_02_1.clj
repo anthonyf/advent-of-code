@@ -1,4 +1,4 @@
-(ns advent-of-code.2016.day2-1)
+(ns advent-of-code.2016.day-02-1)
 
 (declare input)
 

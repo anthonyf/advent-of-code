@@ -1,5 +1,5 @@
-(ns advent-of-code.2016.day2-2
-  (:require [advent-of-code.2016.day2-1 :as d2-1]))
+(ns advent-of-code.2016.day-02-2
+  (:require [advent-of-code.2016.day-02-1 :as d2-1]))
 
 (def keypad '[[_ _ 1 _ _]
               [_ 2 3 4 _]

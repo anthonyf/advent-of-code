@@ -1,6 +1,6 @@
-(ns advent-of-code.2016.day6-1
+(ns advent-of-code.2016.day-06-1
   (:require [advent-of-code.utils :as u]
-            [advent-of-code.2016.day6-data :as d]
+            [advent-of-code.2016.day-06-data :as d]
             [clojure.string :as str]))
 
 (defn collect-letter

@@ -1,6 +1,6 @@
-(ns advent-of-code.2016.day6-2
-  (:require [advent-of-code.2016.day6-1 :as d6]
-            [advent-of-code.2016.day6-data :as d]))
+(ns advent-of-code.2016.day-06-2
+  (:require [advent-of-code.2016.day-06-1 :as d6]
+            [advent-of-code.2016.day-06-data :as d]))
 
 (defn most-freq-for-column
   [pos-letter-freqs pos]

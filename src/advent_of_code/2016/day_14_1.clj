@@ -1,4 +1,4 @@
-(ns advent-of-code.2016.day14-1
+(ns advent-of-code.2016.day-14-1
   (:require [digest :refer [md5]]))
 
 (defn triple

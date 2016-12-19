@@ -1,4 +1,4 @@
-(ns advent-of-code.2016.day7-data)
+(ns advent-of-code.2016.day-07-data)
 
 (def raw-data "xdsqxnovprgovwzkus[fmadbfsbqwzzrzrgdg]aeqornszgvbizdm
 itgslvpxoqqakli[arktzcssgkxktejbno]wsgkbwwtbmfnddt[zblrboqsvezcgfmfvcz]iwyhyatqetsreeyhh
