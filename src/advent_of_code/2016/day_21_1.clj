@@ -104,17 +104,18 @@
 ;; => [\c \d \e \a \b]
 
 (defn scramble
-  [password input]
+  [password line-scrambler-fn input]
   (apply str
-         (reduce scramble-line
+         (reduce line-scrambler-fn
                  (vec password)
                  (str/split-lines input))))
 
-#_ (scramble "abcde" d/test-input)
+#_ (scramble "abcde" scramble-line d/test-input)
+;; => "decab"
 
 (defn solve
   []
-  (scramble "abcdefgh" d/puzzle-input))
+  (scramble "abcdefgh" scramble-line d/puzzle-input))
 
 #_ (solve)
 ;; => "agcebfdh"
