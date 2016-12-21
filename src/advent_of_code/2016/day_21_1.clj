@@ -73,7 +73,7 @@
 ;; => [\b \d \e \a \c]
 
 (def scramble-dispatch-table
-  ;; [ scramble-function | regex | argument conversions ]
+  ;; [ regex | scramble-function | argument conversions ]
   [[re-swap-positions    swap-positions    [#(Integer/parseInt %)
                                             #(Integer/parseInt %)]]
    [re-swap-letters      swap-letters      [first first]]
