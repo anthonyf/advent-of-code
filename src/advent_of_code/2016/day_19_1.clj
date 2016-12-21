@@ -13,17 +13,17 @@
 ;; => (3)
 
 (defn exchange-presents
-  [number-of-elves]
+  [number-of-elves step-fn]
   (loop [elves (vec (range 1 (inc number-of-elves)))]
     (if (= (count elves) 1)
       (first elves)
-      (recur (step elves)))))
+      (recur (step-fn elves)))))
 
 #_ (exchange-presents 5) ;; => 3
 
 (defn solve
   []
-  (exchange-presents 3014387))
+  (exchange-presents 3014387 step))
 
 #_ (solve)
 ;; => 1834471
