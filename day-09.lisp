@@ -36,10 +36,32 @@
   (->> input
     (map 'list (lambda (line)
 		 (->> line
-		   #'diff-seqs
-		   #'extrapolate)))
+		   diff-seqs
+		   extrapolate)))
+    (reduce #'+)))
+
+
+(defun extrapolate-2 (seqs)
+  (let* ((start (loop for s in (reverse seqs)
+		      collect (first s))))
+    (-> (loop for n in (rest start)
+	      for x = (- n 0) then (- n x) 
+	      collect x)
+	last
+	car)))
+
+(defun solve-2 (input)
+  (->> input
+    (map 'list (lambda (line)
+		 (->> line
+		   diff-seqs
+		   extrapolate-2)))
     (reduce #'+)))
 
 (solve-1 *sample*)
 
 (solve-1 *input*)
+
+(solve-2 *sample*)
+
+(solve-2 *input*)
