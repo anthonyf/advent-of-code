@@ -1,26 +1,29 @@
 ;;;; package.lisp
 
-(defpackage #:advent-of-code-2023
-  (:use #:cl))
+(uiop:define-package #:advent-of-code-util
+  (:use #:cl)
+  (:export #:file-lines))
 
-(defpackage #:util
-  (:use #:cl #:uiop))
+(uiop:define-package #:day-01
+  (:use #:cl)
+  (:local-nicknames (#:u #:advent-of-code-util)
+		    (#:a #:arrow-macros)
+		    (#:s #:serapeum)))
 
-(defpackage #:day-01
-  (:use #:cl #:uiop #:advent-of-code-2023 #:arrow-macros))
-
-(defpackage #:day-02
+(uiop:define-package #:day-02
   (:use #:cl #:uiop #:advent-of-code-2023 #:arrow-macros #:trivia
 	#:ppcre)
   (:shadowing-import-from #:trivia :<>))
 
-(defpackage #:day-08
-  (:use #:cl #:uiop #:advent-of-code-2023 #:arrow-macros #:trivia
-	#:ppcre)
-  (:shadowing-import-from #:arrow-macros :<>)
-  #+nil(:shadowing-import-from #:uiop :copy-file :ensure-gethash :featurep :emptyp :simple-style-warning))
+(uiop:define-package #:advent-of-code-2023-day-08
+  (:use #:cl)
+  (:local-nicknames (#:u #:advent-of-code-util)
+		    (#:a #:arrow-macros)
+		    (#:s #:serapeum)
+		    (#:p #:ppcre)
+		    (#:t #:trivia)))
 
-(defpackage #:day-09
+(uiop:define-package #:day-09
   (:use #:cl #:uiop #:advent-of-code-2023 #:arrow-macros #:trivia
 	#:ppcre )
   (:shadowing-import-from #:arrow-macros :<>))

@@ -1,13 +1,13 @@
 (in-package #:day-01)
 
 (defparameter *sample*
- (read-file-lines #p "2023/day-01-sample.txt"))
+ (u:file-lines #p "2023/day-01-sample.txt"))
 
 (defparameter *sample2*
- (read-file-lines #p "2023/day-01-sample2.txt"))
+ (u:file-lines #p "2023/day-01-sample2.txt"))
 
 (defparameter *input*
-  (read-file-lines #p "2023/day-01-input.txt"))
+  (u:file-lines #p "2023/day-01-input.txt"))
 
 (defun solve-line (line)
   (loop with first = nil
@@ -37,11 +37,11 @@
 			("nine" . "9")))
 
 (defun indexes (line &key from-end)
-  (-<> (loop for (s . c) in *names*
+  (a:-<> (loop for (s . c) in *names*
 	 append (append (list (list s c (search s line :from-end from-end)))
 			(list (list s c (search c line :from-end from-end)))))
-    (serapeum:filter #'third <>)
-    (sort <> (if from-end #'> #'<) :key #'third)
+    (s:filter #'third a:<>)
+    (sort a:<> (if from-end #'> #'<) :key #'third)
     first
     second
     parse-integer))
