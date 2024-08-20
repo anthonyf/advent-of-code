@@ -2,7 +2,7 @@
 
 
 (defparameter *sample*
-  (read-file-lines #P "day-02-sample.txt"))
+  (read-file-lines #P "2023/day-02-sample.txt"))
 (multiple-value-list 
  (scan-to-strings "^Game (\\d+):(?:(\\s(?:\\d+) (\\w+),?)+;?)+$"
 			 "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"))

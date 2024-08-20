@@ -14,13 +14,13 @@
 	  :network network)))
 
 (defparameter *sample-1*
-  (parse-input #P "day-08-sample-1.txt"))
+  (parse-input #P "2023/day-08-sample-1.txt"))
 
 (defparameter *sample-2*
-  (parse-input #P "day-08-sample-2.txt"))
+  (parse-input #P "2023/day-08-sample-2.txt"))
 
 (defparameter *input*
-  (parse-input #P "day-08-input.txt"))
+  (parse-input #P "2023/day-08-input.txt"))
 
 (defun do-step (network current-node dirs dirs-index)
   (let-match* (((cons l r) (gethash current-node network))
@@ -50,7 +50,7 @@
 (solve-1 *input*)
 
 (defparameter *sample-3*
-  (parse-input #P "day-08-sample-3.txt"))
+  (parse-input #P "2023/day-08-sample-3.txt"))
 
 (destructuring-bind (&key directions network) *sample-3*
   (let* ((starting-nodes (->> (alexandria:hash-table-keys network)

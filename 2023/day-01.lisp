@@ -1,13 +1,13 @@
 (in-package #:day-01)
 
 (defparameter *sample*
- (read-file-lines #p "day-01-sample.txt"))
+ (read-file-lines #p "2023/day-01-sample.txt"))
 
 (defparameter *sample2*
- (read-file-lines #p "day-01-sample2.txt"))
+ (read-file-lines #p "2023/day-01-sample2.txt"))
 
 (defparameter *input*
-  (read-file-lines #p "day-01-input.txt"))
+  (read-file-lines #p "2023/day-01-input.txt"))
 
 (defun solve-line (line)
   (loop with first = nil

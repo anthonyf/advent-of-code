@@ -11,10 +11,10 @@
 				(parse-integer n))))))))
 
 (defparameter *sample*
-  (parse-input #P "day-09-sample.txt"))
+  (parse-input #P "2023/day-09-sample.txt"))
 
 (defparameter *input*
-  (parse-input #P "day-09-input.txt"))
+  (parse-input #P "2023/day-09-input.txt"))
 
 (defun diff-seq (seq)
   (loop for (a b) on seq by #'cdr
