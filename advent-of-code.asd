@@ -12,6 +12,7 @@
 	       #:uiop
 	       #:cl-ppcre)
   :components ((:file "package")
+	       (:file "util")
 	       (:module "2023"
 		:components((:file "day-01")
 			    (:file "day-02")

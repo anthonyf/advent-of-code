@@ -11,7 +11,7 @@
 		    (#:s #:serapeum)))
 
 (uiop:define-package #:day-02
-  (:use #:cl #:uiop #:advent-of-code-2023 #:arrow-macros #:trivia
+  (:use #:cl #:uiop #:arrow-macros #:trivia
 	#:ppcre)
   (:shadowing-import-from #:trivia :<>))
 
@@ -24,6 +24,6 @@
 		    (#:t #:trivia)))
 
 (uiop:define-package #:day-09
-  (:use #:cl #:uiop #:advent-of-code-2023 #:arrow-macros #:trivia
+  (:use #:cl #:uiop #:arrow-macros #:trivia
 	#:ppcre )
   (:shadowing-import-from #:arrow-macros :<>))
