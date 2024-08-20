@@ -29,21 +29,18 @@
 			      r))
 	       (next-dirs-index (mod (1+ dirs-index)
 				     (length dirs))))
-    (values next-node next-dirs-index)))
+    (list :current-node next-node :dir-index next-dirs-index)))
 
 
 (defun steps (network dirs)
   (let ((current-node "AAA")
 	(dirs-index 0))
     (loop while (not (equal "ZZZ" current-node))
-	  do (multiple-value-bind (cn di)
-		 (do-step network current-node dirs dirs-index)
-	       (setf current-node cn
-		     dirs-index di))
+	  do (match (do-step network current-node dirs dirs-index)
+	       ((plist :current-node cn :dir-index di) 
+		(setf current-node cn
+		      dirs-index di)))
 	  count 1)))
-
-(destructuring-bind (&key directions network) *sample-1*
-  (multiple-value-list (do-step network "CCC" directions 1)))
 
 (defun solve-1 (input)
  (destructuring-bind (&key directions network) input
@@ -51,3 +48,19 @@
 
 
 (solve-1 *input*)
+
+(defparameter *sample-3*
+  (parse-input #P "day-08-sample-3.txt"))
+
+(destructuring-bind (&key directions network) *sample-3*
+  (let* ((starting-nodes (->> (alexandria:hash-table-keys network)
+			   (remove-if-not (lambda (s) (serapeum:string-suffix-p "A" s)))))
+	 (starting-states (map 'list (lambda (start)
+				      (list :current-node start
+					    :dir-index 0))
+			       starting-nodes)))
+    starting-states
+))
+
+
+

@@ -17,9 +17,10 @@
 (defpackage #:day-08
   (:use #:cl #:uiop #:advent-of-code-2023 #:arrow-macros #:trivia
 	#:ppcre)
-  (:shadowing-import-from #:trivia :<>))
+  (:shadowing-import-from #:arrow-macros :<>)
+  #+nil(:shadowing-import-from #:uiop :copy-file :ensure-gethash :featurep :emptyp :simple-style-warning))
 
 (defpackage #:day-09
   (:use #:cl #:uiop #:advent-of-code-2023 #:arrow-macros #:trivia
-	#:ppcre)
+	#:ppcre )
   (:shadowing-import-from #:arrow-macros :<>))
