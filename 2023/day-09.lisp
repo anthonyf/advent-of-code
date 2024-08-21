@@ -1,4 +1,4 @@
-(in-package #:day-09)
+(in-package #:advent-of-code-2023-day-09)
 
 
 (defun parse-input (file)
