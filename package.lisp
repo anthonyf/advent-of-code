@@ -26,6 +26,11 @@
   (:import-from #:arrow-macros
 		#:->>))
 
+(uiop:define-package #:advent-of-code-2023-day-03
+  (:use #:cl)
+  (:import-from #:advent-of-code-util
+		#:file-lines))
+
 (uiop:define-package #:advent-of-code-2023-day-08
   (:use #:cl)
   (:import-from #:advent-of-code-util
