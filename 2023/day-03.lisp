@@ -5,6 +5,7 @@
 
 (in-package #:advent-of-code/2023/day-03)
 
+(declaim (optimize (debug 3)))
 
 (defstruct num-node
   num
@@ -33,7 +34,7 @@
 		   else if (eql #\. char)
 			  do (funcall update-nums-fun)
 		   else
-		     do (progn (push (cons pos-x pos-y) symbol-positions)
+		     do (progn (push (list char pos-x pos-y) symbol-positions)
 			       (funcall update-nums-fun))
 		   finally (funcall update-nums-fun))
 	  finally (return (list (reverse num-positions)
@@ -43,12 +44,14 @@
 (defparameter *sample* (parse-file "2023/day-03-sample.txt"))
 (defparameter *input* (parse-file "2023/day-03-input.txt"))
 
+(defparameter *offsets* '((-1 -1) (-1 0) (-1 1)
+			  (0 -1) (0 1)
+			  (1 -1) (1 0) (1 1)))
+
 (defun valid-number-p (number-positions symbol-positions)
   (loop for (np-x . np-y) in number-positions
-	thereis (loop for (sp-x . sp-y) in symbol-positions
-		      thereis (loop for (ox oy) in '((-1 -1) (-1 0) (-1 1)
-						     (0 -1) (0 1)
-						     (1 -1) (1 0) (1 1))
+	thereis (loop for (char sp-x sp-y) in symbol-positions
+		      thereis (loop for (ox oy) in *offsets*
 				    thereis (and (= sp-x (+ ox np-x))
 						 (= sp-y (+ oy np-y)))))))
 
@@ -69,3 +72,29 @@
 #+nil
 (solve-1 *input*)
 
+(defun adjacent-numbers (data sp-x sp-y)
+  (destructuring-bind (nums symbol-positions)
+      data
+    (declare (ignore symbol-positions))
+    (loop for num in nums
+	  when (loop for (np-x . np-y) in (num-node-positions num)
+		     thereis (loop for (ox oy) in *offsets*
+				   thereis (and (= sp-x (+ ox np-x))
+						(= sp-y (+ oy np-y)))))
+	    collect num)))
+
+(defun solve-2 (data)
+  (destructuring-bind (nums symbol-positions)
+      data
+    (declare (ignore nums))
+    (loop for (sym sp-x sp-y) in symbol-positions
+	  for nums = (adjacent-numbers data sp-x sp-y)
+	  when (= 2 (length nums))
+	    sum (* (num-node-num (first nums))
+		   (num-node-num (second nums))))))
+
+#+nil
+(solve-2 *sample*)
+
+#+nil
+(solve-2 *input*)
