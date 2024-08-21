@@ -1,8 +1,8 @@
-(in-package #:day-02)
+(in-package #:advent-of-code-2023-day-02)
 
 
 (defparameter *sample*
-  (read-file-lines #P "2023/day-02-sample.txt"))
+  (file-lines #P "2023/day-02-sample.txt"))
 (multiple-value-list 
  (scan-to-strings "^Game (\\d+):(?:(\\s(?:\\d+) (\\w+),?)+;?)+$"
 			 "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"))
@@ -15,13 +15,13 @@
 			       (->> s
 				 (split ",")
 				 (map 'list (lambda (s)
-					     (register-groups-bind (n color)
-						 ("\\s*(\\d+) (\\w+)" s)
-					       (list (intern (string-upcase color) "KEYWORD")
-						     (parse-integer n))))
+					      (register-groups-bind (n color)
+						  ("\\s*(\\d+) (\\w+)" s)
+						(list (intern (string-upcase color) "KEYWORD")
+						      (parse-integer n))))
 				      ))))))
 	  )
-     (list game sets))))
+      (list game sets))))
 
 (parse-line "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green")
 
