@@ -60,3 +60,22 @@
 (print *input*)
 (solve-1 *input*)
 
+(defun lowest-possible (data)
+  (loop for round in data
+	with (max-red max-blue max-green) = (list 0 0 0)
+	do (loop for (color count) in round
+		      collect (case color
+				(:blue (setf max-blue (max max-blue count)))
+				(:red (setf max-red (max max-red count)))
+				(:green (setf max-green (max max-green count)))))
+	finally (return (list max-red max-blue max-green))))
+
+(defun solve-2 (input)
+  (loop for (game data) in input
+	sum (apply #'* (lowest-possible data))))
+
+#+nil
+(solve-2 *sample*)
+
+#+nil
+(solve-2 *input*)
