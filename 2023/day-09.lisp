@@ -3,7 +3,7 @@
 
 (defun parse-input (file)
   (->> file
-    read-file-lines
+    file-lines
     (map 'list (lambda (line)
 		 (->> line
 		   (split "\\s")

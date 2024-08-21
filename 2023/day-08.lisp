@@ -2,12 +2,12 @@
 
 
 (defun parse-input (file)
-  (let* ((lines (u:file-lines file))
+  (let* ((lines (file-lines file))
 	 (directions (first lines))
 	 (rest-lines (cddr lines))
 	 (network (let ((network (make-hash-table :test 'equal)))
 		    (loop for line in rest-lines
-			  do (p:register-groups-bind (a b c) ("^(\\w+) = \\((\\w+), (\\w+)\\)$" line)
+			  do (register-groups-bind (a b c) ("^(\\w+) = \\((\\w+), (\\w+)\\)$" line)
 			       (setf (gethash a network) (cons b c))))
 		    network)))
     (list :directions directions
@@ -23,7 +23,7 @@
   (parse-input #P "2023/day-08-input.txt"))
 
 (defun do-step (network current-node dirs dirs-index)
-  (t:let-match* (((cons l r) (gethash current-node network))
+  (let-match* (((cons l r) (gethash current-node network))
 		 (next-node (if (equal #\L (aref dirs dirs-index))
 				l
 				r))
@@ -36,8 +36,8 @@
   (let ((current-node "AAA")
 	(dirs-index 0))
     (loop while (not (equal "ZZZ" current-node))
-	  do (t:match (do-step network current-node dirs dirs-index)
-	       ((t:plist :current-node cn :dir-index di) 
+	  do (match (do-step network current-node dirs dirs-index)
+	       ((plist :current-node cn :dir-index di) 
 		(setf current-node cn
 		      dirs-index di)))
 	  count 1)))

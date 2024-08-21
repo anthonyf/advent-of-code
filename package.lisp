@@ -28,13 +28,21 @@
 
 (uiop:define-package #:advent-of-code-2023-day-08
   (:use #:cl)
-  (:local-nicknames (#:u #:advent-of-code-util)
-		    (#:a #:arrow-macros)
-		    (#:s #:serapeum)
-		    (#:p #:ppcre)
-		    (#:t #:trivia)))
+  (:import-from #:advent-of-code-util
+		#:file-lines)
+  (:import-from #:ppcre
+		#:register-groups-bind)
+  (:import-from #:trivia
+		#:plist
+		#:match
+		#:let-match*))
 
 (uiop:define-package #:day-09
-  (:use #:cl #:uiop #:arrow-macros #:trivia
-	#:ppcre )
-  (:shadowing-import-from #:arrow-macros :<>))
+  (:use #:cl)
+  (:import-from #:advent-of-code-util
+		#:file-lines)
+  (:import-from #:arrow-macros
+		#:->
+		#:->>)
+  (:import-from #:ppcre
+		#:split))
