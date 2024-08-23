@@ -1,4 +1,15 @@
-(in-package #:advent-of-code-2023-day-02)
+(uiop:define-package #:advent-of-code/2023/day-02
+  (:use #:cl)
+  (:import-from #:advent-of-code/util
+		#:file-lines)
+  (:import-from #:cl-ppcre
+		#:scan-to-strings
+		#:split
+		#:register-groups-bind)
+  (:import-from #:arrow-macros
+		#:->>))
+
+(in-package #:advent-of-code/2023/day-02)
 
 (declaim (optimize (debug 3)))
 

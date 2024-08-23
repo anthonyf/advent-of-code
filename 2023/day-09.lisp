@@ -1,4 +1,14 @@
-(in-package #:advent-of-code-2023-day-09)
+(uiop:define-package #:advent-of-code/2023/day-09
+  (:use #:cl)
+  (:import-from #:advent-of-code/util
+		#:file-lines)
+  (:import-from #:arrow-macros
+		#:->
+		#:->>)
+  (:import-from #:cl-ppcre
+		#:split))
+
+(in-package #:advent-of-code/2023/day-09)
 
 
 (defun parse-input (file)

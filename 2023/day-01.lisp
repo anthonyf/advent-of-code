@@ -1,4 +1,14 @@
-(in-package #:day-01)
+(uiop:define-package #:advent-of-code/2023/day-01
+  (:use #:cl)
+  (:import-from #:advent-of-code/util
+		#:file-lines)
+  (:import-from #:arrow-macros
+		#:<>
+		#:-<>)
+  (:import-from #:serapeum
+		#:filter))
+
+(in-package #:advent-of-code/2023/day-01)
 
 (defparameter *sample*
   (file-lines #p "2023/day-01-sample.txt"))

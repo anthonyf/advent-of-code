@@ -1,4 +1,9 @@
-(in-package :advent-of-code-util)
+(defpackage #:advent-of-code/util
+  (:use #:cl)
+  (:import-from #:uiop)
+  (:import-from #:asdf))
+
+(in-package :advent-of-code/util)
 
 (defun file-lines (file)
   (uiop:read-file-lines

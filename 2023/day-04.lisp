@@ -1,4 +1,19 @@
-(in-package #:advent-of-code-2023-day-04)
+(uiop:define-package #:advent-of-code/2023/day-04
+  (:use #:cl)
+  (:import-from #:advent-of-code/util
+		#:file-lines)
+  (:import-from #:arrow-macros
+		#:->>
+		#:->)
+  (:import-from #:trivia
+		#:match
+		#:let-match
+		#:let-match*))
+
+
+(in-package #:advent-of-code/2023/day-04)
+
+(declaim (optimize (debug 3)))
 
 (defun string-to-integer-list (str)
   (map 'list #'parse-integer
@@ -42,3 +57,14 @@
 
 #+nil
 (solve-1 *input*)
+
+(defun solve-2 (data)
+  (declare (optimize (debug 3)))
+  (let ((card-instances (map 'list (lambda (row)
+				     (list 1 row))
+			     data)))
+    card-instances))
+
+#+nil
+(solve-2 *sample*)
+

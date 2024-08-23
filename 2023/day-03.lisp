@@ -1,4 +1,9 @@
-(in-package #:advent-of-code-2023-day-03)
+(uiop:define-package #:advent-of-code/2023/day-03
+  (:use #:cl)
+  (:import-from #:advent-of-code/util
+		#:file-lines))
+
+(in-package #:advent-of-code/2023/day-03)
 
 
 (defstruct num-node
