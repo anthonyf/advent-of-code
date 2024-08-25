@@ -1,7 +1,8 @@
 (defpackage #:advent-of-code/util
   (:use #:cl)
   (:import-from #:uiop)
-  (:import-from #:asdf))
+  (:import-from #:asdf)
+  (:export #:file-lines))
 
 (in-package :advent-of-code/util)
 
