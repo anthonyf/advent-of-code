@@ -1,3 +1,5 @@
+(declaim (optimize (speed 3) (debug 0)))
+
 (uiop:define-package #:advent-of-code/2023/day-05
   (:use #:cl)
   (:mix #:advent-of-code/util
