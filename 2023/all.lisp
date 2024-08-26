@@ -6,6 +6,8 @@
 		 #:advent-of-code/2023/day-03
 		 #:advent-of-code/2023/day-04
 		 #:advent-of-code/2023/day-05
+		 #:advent-of-code/2023/day-06
+		 #:advent-of-code/2023/day-07
 
 		 #:advent-of-code/2023/day-08
 		 #:advent-of-code/2023/day-09)
