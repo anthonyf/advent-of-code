@@ -49,3 +49,24 @@
 
 #+nil
 (solve-1 *input*)
+
+(defun concat-numbers (nums)
+  (parse-integer
+   (apply #'concatenate 'string
+	  (mapcar #'write-to-string nums))))
+
+#+nil
+(concat-numbers '(10 20 30))
+
+(defun solve-2 (input)
+  (let-match* (((plist :times times :distances distances) input)
+	       (time (concat-numbers times))
+	       (distance (concat-numbers distances)))
+    (ways-to-win time distance)))
+
+
+#+nil
+(solve-2 *sample*)
+
+#+nil
+(solve-2 *input*)
