@@ -1,21 +1,13 @@
 (uiop:define-package #:advent-of-code/2023/day-08
   (:use #:cl)
-  (:import-from #:advent-of-code/util
-		#:file-lines)
-  (:import-from #:cl-ppcre
-		#:register-groups-bind)
-  (:import-from #:trivia
-		#:let-match
-		#:plist
-		#:match
-		#:let-match*))
+  (:mix #:advent-of-code/util
+	#:cl-ppcre
+	#:trivia))
 
 (in-package #:advent-of-code/2023/day-08)
 
-
-(defun parse-input (file)
-  (let* ((lines (file-lines file))
-	 (directions (first lines))
+(defun parse-lines (lines)
+  (let* ((directions (first lines))
 	 (rest-lines (cddr lines))
 	 (network (let ((network (make-hash-table :test 'equal)))
 		    (loop for line in rest-lines
@@ -26,13 +18,25 @@
 	  :network network)))
 
 (defparameter *sample-1*
-  (parse-input #P "2023/day-08-sample-1.txt"))
+  (parse-lines (string-lines "RL
+
+AAA = (BBB, CCC)
+BBB = (DDD, EEE)
+CCC = (ZZZ, GGG)
+DDD = (DDD, DDD)
+EEE = (EEE, EEE)
+GGG = (GGG, GGG)
+ZZZ = (ZZZ, ZZZ)")))
 
 (defparameter *sample-2*
-  (parse-input #P "2023/day-08-sample-2.txt"))
+  (parse-lines (string-lines "LLR
+
+AAA = (BBB, BBB)
+BBB = (AAA, ZZZ)
+ZZZ = (ZZZ, ZZZ)")))
 
 (defparameter *input*
-  (parse-input #P "2023/day-08-input.txt"))
+  (parse-lines (input-lines 2023 8)))
 
 (defun do-step (network current-node dirs dirs-index)
   (let-match* (((cons l r) (gethash current-node network))
@@ -63,6 +67,16 @@
 (solve-1 *input*)
 
 (defparameter *sample-3*
-  (parse-input #P "2023/day-08-sample-3.txt"))
+  (parse-lines (string-lines "LR
+
+11A = (11B, XXX)
+11B = (XXX, 11Z)
+11Z = (11B, XXX)
+22A = (22B, XXX)
+22B = (22C, 22C)
+22C = (22Z, 22Z)
+22Z = (22B, 22B)
+XXX = (XXX, XXX)
+")))
 
 

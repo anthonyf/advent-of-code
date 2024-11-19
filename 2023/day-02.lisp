@@ -1,13 +1,8 @@
 (uiop:define-package #:advent-of-code/2023/day-02
   (:use #:cl)
-  (:import-from #:advent-of-code/util
-		#:file-lines)
-  (:import-from #:cl-ppcre
-		#:scan-to-strings
-		#:split
-		#:register-groups-bind)
-  (:import-from #:arrow-macros
-		#:->>))
+  (:use #:advent-of-code/util
+	#:cl-ppcre
+	#:arrow-macros))
 
 (in-package #:advent-of-code/2023/day-02)
 
@@ -30,12 +25,17 @@
 				      )))))))
       (list game sets))))
 
-(defun parse-file (file)
-  (->> (file-lines file)
+(defun parse-lines (lines)
+  (->> lines
     (map 'list #'parse-line)))
 
-(defparameter *sample* (parse-file #P "2023/day-02-sample.txt"))
-(defparameter *input* (parse-file #P "2023/day-02-input.txt"))
+(defparameter *sample* (parse-lines (string-lines "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
+Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
+Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
+Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green")))
+
+(defparameter *input* (parse-lines (input-lines 2023 2)))
 
 
 #+nil

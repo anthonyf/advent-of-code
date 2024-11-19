@@ -1,23 +1,28 @@
 (uiop:define-package #:advent-of-code/2023/day-01
   (:use #:cl)
-  (:import-from #:advent-of-code/util
-		#:file-lines)
-  (:import-from #:arrow-macros
-		#:<>
-		#:-<>)
-  (:import-from #:serapeum
-		#:filter))
+  (:mix #:advent-of-code/util
+	#:arrow-macros
+	#:serapeum))
 
 (in-package #:advent-of-code/2023/day-01)
 
 (defparameter *sample*
-  (file-lines #p "2023/day-01-sample.txt"))
+  (string-lines "1abc2
+pqr3stu8vwx
+a1b2c3d4e5f
+treb7uchet"))
 
 (defparameter *sample2*
- (file-lines #p "2023/day-01-sample2.txt"))
+  (string-lines "two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen"))
 
 (defparameter *input*
-  (file-lines #p "2023/day-01-input.txt"))
+  (input-lines 2023 1))
 
 (defun solve-line (line)
   (loop with first = nil

@@ -8,17 +8,21 @@
 
 (in-package #:advent-of-code/2023/day-07)
 
-(defun parse-file (file)
-  (~>> file
-       (file-lines)
+(defun parse-lines (lines)
+  (~>> lines
        (mapcar (lambda (line)
 		 (let-match (((list cards bid) (split "\\s" line)))
 		   (cons cards (parse-integer bid)))))))
 #+nil
 (parse-file "2023/day-07-sample.txt")
 
-(defparameter *sample* (parse-file "2023/day-07-sample.txt"))
-(defparameter *input* (parse-file "2023/day-07-input.txt"))
+(defparameter *sample* (parse-lines (string-lines "32T3K 765
+T55J5 684
+KK677 28
+KTJJT 220
+QQQJA 483")))
+
+(defparameter *input* (parse-lines (input-lines 2023 7)))
 
 (defparameter *hands* (reverse (vector :five-of-a-kind :four-of-a-kind :full-house :three-of-a-kind :two-pair :one-pair :high-card)))
 

@@ -1,19 +1,14 @@
 (uiop:define-package #:advent-of-code/2023/day-09
   (:use #:cl)
-  (:import-from #:advent-of-code/util
-		#:file-lines)
-  (:import-from #:arrow-macros
-		#:->
-		#:->>)
-  (:import-from #:cl-ppcre
-		#:split))
+  (:mix #:advent-of-code/util
+	#:arrow-macros
+	#:cl-ppcre))
 
 (in-package #:advent-of-code/2023/day-09)
 
 
-(defun parse-input (file)
-  (->> file
-    file-lines
+(defun parse-lines (lines)
+  (->> lines
     (map 'list (lambda (line)
 		 (->> line
 		   (split "\\s")
@@ -21,10 +16,12 @@
 				(parse-integer n))))))))
 
 (defparameter *sample*
-  (parse-input #P "2023/day-09-sample.txt"))
+  (parse-lines (string-lines "0 3 6 9 12 15
+1 3 6 10 15 21
+10 13 16 21 30 45")))
 
 (defparameter *input*
-  (parse-input #P "2023/day-09-input.txt"))
+  (parse-lines (input-lines 2023 9)))
 
 (defun diff-seq (seq)
   (loop for (a b) on seq by #'cdr

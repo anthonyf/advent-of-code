@@ -14,17 +14,18 @@
 			    (regex str)
 			  a))))
 
-(defun parse-file (file)
-  (let* ((str (file-string file))
-	 (times (parse-line str "Time:\\s+((\\d+\\s+)+)"))
+(defun parse-str (str)
+  (let* ((times (parse-line str "Time:\\s+((\\d+\\s+)+)"))
 	 (distances (parse-line str "Distance:\\s+((\\d+\\s+)+)")))
     (list :times times :distances distances)))
 
 #+nil
 (parse-file "2023/day-06-sample.txt")
 
-(defparameter *sample* (parse-file "2023/day-06-sample.txt"))
-(defparameter *input* (parse-file "2023/day-06-input.txt"))
+(defparameter *sample* (parse-str "Time:      7  15   30
+Distance:  9  40  200"))
+
+(defparameter *input* (parse-str (input-string 2023 6)))
 
 (defun ways-to-win (race-time record-distance)
   (->> (iter

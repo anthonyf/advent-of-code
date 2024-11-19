@@ -1,7 +1,6 @@
 (uiop:define-package #:advent-of-code/2023/day-03
   (:use #:cl)
-  (:import-from #:advent-of-code/util
-		#:file-lines))
+  (:mix #:advent-of-code/util))
 
 (in-package #:advent-of-code/2023/day-03)
 
@@ -11,38 +10,47 @@
   num
   positions)
 
-(defun parse-file (file)
-  (let ((lines (file-lines file)))
-    (loop for line in lines
-	  for pos-y = 0 then (incf pos-y)
-	  with digits = nil
-	  with positions = nil
-	  with symbol-positions = nil
-	  with num-positions = nil
-	  with update-nums-fun = (lambda ()
-				   (when digits
-				     (push (make-num-node :num (parse-integer (concatenate 'string (reverse digits)))
-							  :positions positions)
-					   num-positions)
-				     (setf digits nil
-					   positions nil)))
-	  do (loop for char across line
-		   for pos-x = 0 then (incf pos-x)
-		   if (digit-char-p char)
-		     do (progn (push char digits)
-			       (push (cons pos-x pos-y) positions))
-		   else if (eql #\. char)
-			  do (funcall update-nums-fun)
-		   else
-		     do (progn (push (list char pos-x pos-y) symbol-positions)
-			       (funcall update-nums-fun))
-		   finally (funcall update-nums-fun))
-	  finally (return (list (reverse num-positions)
-				(reverse symbol-positions))))))
+(defun parse-lines (lines)
+  (loop for line in lines
+	for pos-y = 0 then (incf pos-y)
+	with digits = nil
+	with positions = nil
+	with symbol-positions = nil
+	with num-positions = nil
+	with update-nums-fun = (lambda ()
+				 (when digits
+				   (push (make-num-node :num (parse-integer (concatenate 'string (reverse digits)))
+							:positions positions)
+					 num-positions)
+				   (setf digits nil
+					 positions nil)))
+	do (loop for char across line
+		 for pos-x = 0 then (incf pos-x)
+		 if (digit-char-p char)
+		   do (progn (push char digits)
+			     (push (cons pos-x pos-y) positions))
+		 else if (eql #\. char)
+			do (funcall update-nums-fun)
+		 else
+		   do (progn (push (list char pos-x pos-y) symbol-positions)
+			     (funcall update-nums-fun))
+		 finally (funcall update-nums-fun))
+	finally (return (list (reverse num-positions)
+			      (reverse symbol-positions)))))
 
 
-(defparameter *sample* (parse-file "2023/day-03-sample.txt"))
-(defparameter *input* (parse-file "2023/day-03-input.txt"))
+(defparameter *sample* (parse-lines (string-lines "467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598..")))
+
+(defparameter *input* (parse-lines (input-lines 2023 3)))
 
 (defparameter *offsets* '((-1 -1) (-1 0) (-1 1)
 			  (0 -1) (0 1)
