@@ -36,23 +36,29 @@ QQQJA 483")))
       ((list 2 3) :full-house)
       ((list 1 1 3) :three-of-a-kind)
       ((list 1 2 2) :two-pair)
-      ((list 1 1 1 2) :pair)
+      ((list 1 1 1 2) :one-pair)
       ((list 1 1 1 1 1) :high-card))))
 
-(defun-ematch hand-score (card)
-  ((list hand-type cards _)
-   (+ (* (position hand-type *hands*) (expt (length *cards*) 5))
-      (iter
-	(for i from 0)
-	(for card in cards)
-	(for p = (position card *cards*))
-	(for d = (+ p (expt (length *cards*) i)))
-	(sum d)))))
+(defun hand-score (hand-type cards)
+  (+ (* (position hand-type *hands*) (expt (length *cards*) 5))
+     (iter
+       (for i from 0)
+       (for card in-vector cards)
+       (for p = (position card *cards*))
+       (for d = (+ p (expt (length *cards*) i)))
+       (sum d))))
+
+#+nil
+(hand-score '(:ONE-PAIR "32T3K" 765))
 
 (defun solve-1 (input)
-  (let ((hands (iter (for (cards . bid) in input)
-		 (collect (list (hand-type cards) cards bid)))))
-    (sort hands #'>)))
+  (let* ((hands (iter (for (cards . bid) in input)
+		  (collect (list (hand-type cards) cards bid))))
+	 (hands (iter (for (hand-type cards bid) in hands )
+		  (collect (list (hand-score hand-type cards) hand-type cards bid))))
+	 )
+    hands
+    (sort hands #'> :key #'car)))
 
 #+nil
 (solve-1 *sample*)
