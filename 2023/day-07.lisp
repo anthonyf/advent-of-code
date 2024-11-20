@@ -40,25 +40,33 @@ QQQJA 483")))
       ((list 1 1 1 1 1) :high-card))))
 
 (defun hand-score (hand-type cards)
-  (+ (* (position hand-type *hands*) (expt (length *cards*) 5))
-     (iter
-       (for i from 0)
-       (for card in-vector cards)
-       (for p = (position card *cards*))
-       (for d = (+ p (expt (length *cards*) i)))
-       (sum d))))
+  (let ((base (length *cards*)))
+    (+ (* (position hand-type *hands*)
+	  (expt base 5))
+       (iter
+	 (for i from 4 downto 0)
+	 (for card in-vector cards)
+	 (for p = (position card *cards*))
+	 (for d = (* p (expt base i)))
+	 (sum d)))))
 
 #+nil
-(hand-score '(:ONE-PAIR "32T3K" 765))
+(hand-score :two-pair "KTJJT")
 
 (defun solve-1 (input)
   (let* ((hands (iter (for (cards . bid) in input)
 		  (collect (list (hand-type cards) cards bid))))
 	 (hands (iter (for (hand-type cards bid) in hands )
 		  (collect (list (hand-score hand-type cards) hand-type cards bid))))
-	 )
-    hands
-    (sort hands #'> :key #'car)))
+	 (hands-sorted (sort hands #'< :key #'car)))
+    
+    (iter
+      (for i from 1)
+      (for (nil nil nil bid) in hands-sorted)
+      (sum (* i bid)))))
 
 #+nil
 (solve-1 *sample*)
+
+#+nil
+(solve-1 *input*)
