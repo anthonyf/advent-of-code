@@ -8,5 +8,23 @@
   :license  "Specify license here"
   :version "0.0.1"
   :class :package-inferred-system
-  :depends-on (#:advent-of-code/2023/all)
-  )
+  :depends-on (#:coalton
+	       #:alexandria
+	       #:serapeum
+	       #:trivia
+	       #:arrow-macros
+	       #:cl-ppcre)
+  :serial t
+  :components ((:file "util")
+	       (:module "2023"
+		:components ((:file "day-01") ;; **
+			     (:file "day-02") ;; **
+			     (:file "day-03") ;; **
+			     (:file "day-04") ;; **
+			     (:file "day-05") ;; **
+			     (:file "day-06") ;; **
+			     (:file "day-07") ;; **
+			     (:file "day-08") ;; *
+			     (:file "day-09") ;; **
+			     (:file "day-10") ;; 
+			     ))))
