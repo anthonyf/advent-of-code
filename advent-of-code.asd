@@ -7,7 +7,6 @@
   :author "Your Name <your.name@example.com>"
   :license  "Specify license here"
   :version "0.0.1"
-  :class :package-inferred-system
   :depends-on (#:coalton
 	       #:alexandria
 	       #:serapeum

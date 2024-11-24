@@ -1,5 +1,6 @@
 (uiop:define-package #:advent-of-code/util
   (:use #:cl)
+  (:nicknames #:aoc/util)
   (:import-from #:uiop)
   (:import-from #:asdf)
   (:export #:input-lines

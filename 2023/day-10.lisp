@@ -11,5 +11,5 @@
 (coalton-toplevel
 
 
-  
+  (define (solve-1 input))
   )
