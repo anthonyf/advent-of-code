@@ -1,8 +1,7 @@
 (uiop:define-package  #:advent-of-code/2023/day-10
-  (:use #:coalton)
-  (:mix #:coalton-library/string
-	#:coalton-library/math
-	#:coalton-library/vector))
+  (:use #:coalton
+	#:coalton-prelude)
+  (:local-nicknames (#:u #:aoc/coalton-util)))
 
 (in-package #:advent-of-code/2023/day-10)
 
@@ -10,6 +9,9 @@
 
 (coalton-toplevel
 
+  (define input (u:input-lines 2023 10))
+  
 
-  (define (solve-1 input))
+  (define (solve-1 _input)
+    nil)
   )
