@@ -15,6 +15,7 @@
 	       #:cl-ppcre)
   :serial t
   :components ((:file "util")
+	       (:file "coalton-util")
 	       (:module "2023"
 		:components ((:file "day-01") ;; **
 			     (:file "day-02") ;; **
