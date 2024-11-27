@@ -7,7 +7,8 @@
   :author "Your Name <your.name@example.com>"
   :license  "Specify license here"
   :version "0.0.1"
-  :depends-on (#:coalton
+  :depends-on (#:cl-dotenv
+	       #:coalton
 	       #:alexandria
 	       #:serapeum
 	       #:trivia

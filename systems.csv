@@ -77,3 +77,5 @@ random-state-test, ghcr.io/ocicl/random-state@sha256:590425d577dc77a433153704f93
 named-readtables, ghcr.io/ocicl/named-readtables@sha256:c13ae35d957cf55f8c877762a24537daee5e8322d9968b14f8c86e8cfc1b2df3, named-readtables-20230809-2c05652/named-readtables.asd
 trivial-gray-streams, ghcr.io/ocicl/trivial-gray-streams@sha256:d0cc9fb73876100ee60647524f98b5b22566fa1c3a985d79548b0d2b228f8b51, trivial-gray-streams-20240503-a7ead68/trivial-gray-streams.asd
 trivial-gray-streams-test, ghcr.io/ocicl/trivial-gray-streams@sha256:d0cc9fb73876100ee60647524f98b5b22566fa1c3a985d79548b0d2b228f8b51, trivial-gray-streams-20240503-a7ead68/trivial-gray-streams-test.asd
+cl-dotenv, ghcr.io/ocicl/cl-dotenv@sha256:0066c93266d78191d40cb418139113fc843e681c453297d1537cf1a38bcd05d2, cl-dotenv-20240503-a093f5b/cl-dotenv.asd
+cl-dotenv-test, ghcr.io/ocicl/cl-dotenv@sha256:0066c93266d78191d40cb418139113fc843e681c453297d1537cf1a38bcd05d2, cl-dotenv-20240503-a093f5b/cl-dotenv-test.asd

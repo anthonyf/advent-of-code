@@ -1,15 +1,15 @@
 (uiop:define-package #:advent-of-code/util
   (:use #:cl)
   (:nicknames #:aoc/util)
-  (:import-from #:uiop)
-  (:import-from #:asdf)
   (:export #:input-lines
 	   #:input-string
 	   #:string-lines))
 
 (in-package :advent-of-code/util)
 
-(defvar *aoc-session* nil)
+(.env:load-env (asdf:system-relative-pathname "advent-of-code" "./.env"))
+
+(defvar *aoc-session* (uiop:getenv "AOC_SESSION_KEY"))
 
 (defun prompt-for-value (prompt)
   (format *query-io* prompt) ;; *query-io*: the special stream to make user queries.
