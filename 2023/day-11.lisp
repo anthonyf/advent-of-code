@@ -17,15 +17,20 @@
 .......#..
 #...#....."))
 
+(iter (for y from 0 below (length *sample*))
+  (collect y result-type vector))
+
 (defun galaxy-positions (input)
-  (let ((positions (iter (for line in input)
-		     (for y from 0)
-		     (appending (iter (for char in-vector line)
-				  (for x from 0)
-				  (when (eql #\# char)
-				    (collect (cons x y))))))))
-    (iter (for y from 0 below (length *sample))
-      (for ys = (serapeum:keep y )))))
+  (iter (for y from 0 below (length input))
+    (for line = (svref input y))
+    (for exp-y = 0)
+    (if (iter (for char in-vector line)
+	  (always (eql #\. char)))
+	(incf exp-y)
+	
+	(appending (iter (for x from 0 below (length line))
+		     (when (eql #\# char)
+		       (collect (cons x (+ y exp-y)))))))))
 
 #+nil
 (galaxy-positions *sample*)
