@@ -63,3 +63,18 @@
 #+nil
 (solve-1 *input*)
 
+(defun unfold (records damaged-counts)
+  (values (serapeum:string-join (loop repeat 5
+				      collect records)
+				"?")
+	  (loop repeat 5
+		append damaged-counts)))
+
+(defun solve-2 (input)
+  (loop for (records damaged-counts) in input
+	sum (multiple-value-bind (records damaged-counts)
+		(unfold records damaged-counts)
+	      (count-arrangements records damaged-counts))))
+
+#+nil
+(solve-2 *sample*)
