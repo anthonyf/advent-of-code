@@ -2,6 +2,7 @@
   (:use #:cl)
   (:mix #:aoc/util
 	#:arrow-macros
+	#:iterate
 	#:trivia))
 
 (in-package #:aoc/2023/day-12)
@@ -25,30 +26,17 @@
 
 (defparameter *input* (parse-lines (input-lines 2023 12)))
 
-(defun count-arrangements (records damaged-counts &optional (current-count 0))
-  (match (list records damaged-counts)
-    ((list (vector) (list))
-     1)
-    ((guard (list (vector) (list d))
-	    (= current-count d))
-     1)
-    ((list (vector* #\.) (list))
-     (count-arrangements (subseq records 1) damaged-counts current-count))
-    ((guard (list (vector* #\.) (list* d _))
-	    (or (= current-count d)
-		(= current-count 0)))
-     (count-arrangements (subseq records 1) (if (= current-count d)
-						(rest damaged-counts)
-						damaged-counts) 0))
-    ((guard (list (vector* #\#) (list* d _))
-	    (< current-count d))
-     (count-arrangements (subseq records 1) damaged-counts (1+ current-count)))
-    ((list (vector* #\?) _)
-     (+ (count-arrangements (concatenate 'string "#" (subseq records 1))
-			    damaged-counts current-count)
-	(count-arrangements (concatenate 'string "." (subseq records 1))
-			    damaged-counts current-count)))
-    (_ 0)))
+(defun count-arrangements (records damaged-counts)
+  (cond ((= (length 0) records)
+	 (if damaged-counts
+	     0
+	     1))
+	((not damaged-counts)
+	 (if (find #\# records)
+	     0
+	     1))
+	((find (aref records 0) ".?")
+	 )))
 
 #+nil
 (count-arrangements "????.######..#####." (list 1 6 5))
