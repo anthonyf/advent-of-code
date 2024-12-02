@@ -44,3 +44,25 @@
 
 #+nil
 (solve-1 *input*)
+
+
+(defun safe-with-tolerance-p (levels)
+  (let ((one-less-levels (iter
+			   (for i from 0 below (length levels))
+			   (collect (append (subseq levels 0 i)
+					    (subseq levels (1+ i)))))))
+    (iter (for levels in one-less-levels)
+      (thereis (safe-p levels)))))
+
+#+nil
+(safe-with-tolerance-p (list 1 2 3))
+
+(defun solve-2 (input)
+  (iter (for levels in input)
+    (summing (if (safe-with-tolerance-p levels) 1 0))))
+
+#+nil
+(solve-2 *sample*)
+
+#+nil
+(solve-2 *input*)
