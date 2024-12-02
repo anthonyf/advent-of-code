@@ -2,7 +2,8 @@
   (:use #:cl)
   (:import-from #:ppcre
 		#:split)
-  (:mix #:aoc/util))
+  (:mix #:aoc/util
+	#:iterate))
 
 (in-package #:aoc/2024/day-02)
 
@@ -21,20 +22,25 @@
 
 (defparameter *input* (parse-lines (input-lines 2024 2)))
 
+
+(defun safe-p (levels)
+  (or (iter (for (a b) on levels by #'cdr)
+	(when b (always (and (< a b)
+			     (let ((increase (- b a)))
+			       (and (>= increase 1)
+				    (<= increase 3)))))))
+      (iter (for (a b) on levels by #'cdr)
+	(when b (always (and (> a b)
+			     (let ((decrease (- a b)))
+			       (and (>= decrease 1)
+				    (<= decrease 3)))))))))
+
 (defun solve-1 (input)
-  (loop for levels in input
-	sum (if (or (loop for (a b) on levels by #'cdr
-			  always (and b (> a b)
-				      #+nil (let ((increase (- b a)))
-					(and (> increase 1)
-					     (<= increase 3)))))
-		    (loop for (a b) on levels by #'cdr
-			  always (and b (< a b)
-				      #+nil(let ((decrease (- a b)))
-					(and (> decrease 1)
-					     (<= decrease 3))))))
-		1
-		0)))
+  (iter (for levels in input)
+    (summing (if (safe-p levels) 1 0))))
 
 #+nil
 (solve-1 *sample*)
+
+#+nil
+(solve-1 *input*)
