@@ -35,11 +35,11 @@
 
 (defun solve-2 (input)
   (loop for line in input
+	with doit = t
 	sum (->> line
 	      (ppcre:all-matches-as-strings "(mul\\([0-9]{1,3},[0-9]{1,3}\\))|(do\\(\\))|(don't\\(\\))")
 	      (lambda (muls)
 		(loop
-		  with doit = t
 		  for mul in muls
 		  when (ppcre:scan "do\\(\\)" mul)
 		    do (setf doit t)
