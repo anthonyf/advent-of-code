@@ -29,9 +29,10 @@
 						   (:file "day-09") ;; **
 						   (:file "day-10") ;;
 						   (:file "day-11") ;; **
-						   (:file "day-12") ;; *
+						   ;;(:file "day-12") ;; *
 						   ))
 			     (:module "2024"
 				      :components ((:file "day-01") ;; **
 						   (:file "day-02") ;; **
+						   (:file "day-03") ;; *
 						   ))))

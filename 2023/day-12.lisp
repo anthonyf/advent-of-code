@@ -27,16 +27,13 @@
 (defparameter *input* (parse-lines (input-lines 2023 12)))
 
 (defun count-arrangements (records damaged-counts)
-  (cond ((= (length 0) records)
-	 (if damaged-counts
-	     0
-	     1))
-	((not damaged-counts)
-	 (if (find #\# records)
-	     0
-	     1))
-	((find (aref records 0) ".?")
-	 )))
+  (match (list records damaged-counts)
+    ((list (vector) (list))
+     1)
+    ((list (vector) (list* _))
+     0)
+    ((list (vector* #\.) _)
+     (count-arrangements))))
 
 #+nil
 (count-arrangements "????.######..#####." (list 1 6 5))
