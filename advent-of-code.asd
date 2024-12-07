@@ -36,7 +36,7 @@
 						   (:file "day-02") ;; **
 						   (:file "day-03") ;; **
 						   (:file "day-04") ;; **
-						   (:file "day-05") ;; 
+						   (:file "day-05") ;; **
 						   (:file "day-06") ;; 
 						   (:file "day-07") ;; 
 						   ;; (:file "day-08") ;; 
