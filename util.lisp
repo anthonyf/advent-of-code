@@ -1,9 +1,16 @@
 (uiop:define-package #:advent-of-code/util
   (:use #:cl)
   (:nicknames #:aoc/util)
+  (:mix #:arrow-macros)
   (:export #:input-lines
 	   #:input-string
-	   #:string-lines))
+	   #:string-lines
+	   #:vmap-width
+	   #:vmap-height
+	   #:vmap-at
+	   #:vmap-in-bounds-p
+	   #:vmap-positions
+	   #:vmap-from-string))
 
 (in-package :advent-of-code/util)
 
@@ -39,3 +46,32 @@
 
 (defun input-lines (year day)
   (string-lines (curl-input year day)))
+
+(defun vmap-width (vmap)
+  (length (aref vmap 0)))
+
+(defun vmap-height (vmap)
+  (length vmap))
+
+
+(defun vmap-at (vmap pos)
+  (destructuring-bind (x . y)
+      pos
+    (aref (aref vmap y) x)))
+
+(defun vmap-in-bounds-p (vmap pos)
+  (destructuring-bind (x . y)
+      pos
+    (and (>= x 0)
+	 (< x (vmap-width vmap))
+	 (>= y 0)
+	 (< y (vmap-height vmap)))))
+
+(defun vmap-positions (vmap)
+  (loop for y from 0 below (vmap-height vmap)
+	append (loop for x from 0 below (vmap-width vmap)
+		     collect (cons x y))))
+
+
+(defun vmap-from-string (str)
+  (-> str string-lines (coerce 'vector)))
