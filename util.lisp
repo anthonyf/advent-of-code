@@ -10,7 +10,10 @@
 	   #:vmap-at
 	   #:vmap-in-bounds-p
 	   #:vmap-positions
-	   #:vmap-from-string))
+	   #:vmap-from-string
+	   #:make-set
+	   #:set-contains-p
+	   #:set-add))
 
 (in-package :advent-of-code/util)
 
@@ -59,6 +62,12 @@
       pos
     (aref (aref vmap y) x)))
 
+(defun (setf vmap-at) (value vmap pos)
+  (destructuring-bind (x . y)
+      pos
+    (setf (aref (aref vmap y) x)
+	  value)))
+
 (defun vmap-in-bounds-p (vmap pos)
   (destructuring-bind (x . y)
       pos
@@ -75,3 +84,17 @@
 
 (defun vmap-from-string (str)
   (-> str string-lines (coerce 'vector)))
+
+
+
+(defun make-set (&key (items nil) (test #'eql))
+  (let ((ht (make-hash-table :test test)))
+    (loop for item in items
+	  do (setf (gethash item ht) item))
+    ht))
+
+(defun set-contains-p (s item)
+  (gethash item s))
+
+(defun set-add (s item)
+  (setf (gethash item s) item))

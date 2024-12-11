@@ -50,13 +50,16 @@
 	    (list nil next-pos direction))
 	(list t pos direction))))
 
+(defun guard-path (input)
+  (remove-duplicates (loop until solvedp
+			   for (solvedp pos direction) = (starting-position input)
+			     then (step-position input pos direction)
+			   collect pos)
+		     :test #'equal))
+
+
 (defun solve-1 (input)
-  (length
-   (remove-duplicates (loop until solvedp
-			    for (solvedp pos direction) = (starting-position input)
-			      then (step-position input pos direction)
-			    collect pos)
-		      :test #'equal)))
+  (length (guard-path input)))
 
 #+nil
 (solve-1 *sample*)
@@ -65,3 +68,31 @@
 #+nil
 (solve-1 *input*)
  ; => 5030 (13 bits, #x13A6)
+
+(defun solve-2 (input)
+  (let-match* ((starting-position (starting-position input))
+	       ((list _ starting-pos _) starting-position)
+	       (obstacle-places (remove starting-pos (guard-path input) :test #'equal)))
+    (loop for obs in obstacle-places
+	  when (let ((result nil))
+		 (setf (vmap-at input obs) #\#)
+		 (setf result (loop with visited = (make-set :test #'equalp)
+				    for (solvedp pos direction) = starting-position
+				      then (step-position input pos direction)
+				    when solvedp
+				      do (return nil)
+				    when (set-contains-p visited (cons pos direction))
+				      do (return t)
+				    do (set-add visited (cons pos direction))))
+		 (setf (vmap-at input obs) #\.)
+		 result)
+	    sum 1
+	  )))
+
+#+nil
+(solve-2 *sample*)
+ ; => 6 (3 bits, #x6, #o6, #b110)
+
+#+nil
+(solve-2 *input*)
+ ; => 1928 (11 bits, #x788)
