@@ -13,7 +13,11 @@
 	   #:vmap-from-string
 	   #:make-set
 	   #:set-contains-p
-	   #:set-add))
+	   #:set-add
+	   #:memoize
+	   #:defmemoized
+	   #:int->digits
+	   #:digits->int))
 
 (in-package :advent-of-code/util)
 
@@ -98,3 +102,31 @@
 
 (defun set-add (s item)
   (setf (gethash item s) item))
+
+(defun memoize (fn)
+  (let ((cache (make-hash-table :test #'equal)))
+    #'(lambda (&rest args)
+        (multiple-value-bind 
+              (result exists)
+            (gethash args cache)
+          (if exists
+              result
+              (setf (gethash args cache)
+                    (apply fn args)))))))
+
+(defmacro defmemoized (name args &body body)
+  `(setf (fdefinition ',name)
+	 (memoize #'(lambda ,args
+		      ,@body))))
+
+(defun int->digits (n)
+  (reverse
+   (loop while (> n 0)
+	 collect (mod n 10)
+	 do (setf n (truncate (/ n 10))))))
+
+(defun digits->int (digits)
+  (loop for d in (reverse digits)
+	for b = 1 then (* b 10)
+	sum (* d b)))
+
