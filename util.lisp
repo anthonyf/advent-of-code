@@ -17,7 +17,9 @@
 	   #:memoize
 	   #:defmemoized
 	   #:int->digits
-	   #:digits->int))
+	   #:digits->int
+	   #:vmap-digit-at
+	   #:vmap-neighbors-4))
 
 (in-package :advent-of-code/util)
 
@@ -66,6 +68,10 @@
       pos
     (aref (aref vmap y) x)))
 
+(defun vmap-digit-at (vmap pos)
+  (- (char-int (vmap-at vmap pos))
+     (char-int #\0)))
+
 (defun (setf vmap-at) (value vmap pos)
   (destructuring-bind (x . y)
       pos
@@ -85,6 +91,16 @@
 	append (loop for x from 0 below (vmap-width vmap)
 		     collect (cons x y))))
 
+(defun vmap-neighbors-4 (input pos)
+  (destructuring-bind (x . y)
+      pos
+    (loop for (ox . oy) in '(( 0 . -1)
+			     ( 1 .  0)
+			     ( 0 .  1)
+			     (-1 .  0))
+	  for npos = (cons (+ x ox) (+ y oy))
+	  when (vmap-in-bounds-p input npos)
+	    collect npos)))
 
 (defun vmap-from-string (str)
   (-> str string-lines (coerce 'vector)))
