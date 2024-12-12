@@ -14,11 +14,6 @@
 01329801
 10456732"))
 
-(defparameter *sample-2* (vmap-from-string "0123
-1234
-8765
-9876"))
-
 (defparameter *input* (vmap-from-string (input-string 2024 10)))
 
 (defun trail-count (input pos)
@@ -44,3 +39,27 @@
 #+nil
 (solve-1 *input*)
  ; => 646 (10 bits, #x286)
+
+(defun trail-count-2 (input pos)
+  (let ((n (vmap-digit-at input pos)))
+    (if (= n 9)
+	1
+	(let ((neighbors (vmap-neighbors-4 input pos)))
+	  (loop for neighbor in neighbors
+		for m = (vmap-digit-at input neighbor)
+		when (= (1+ n) m)
+		  sum (trail-count-2 input neighbor))))))
+
+(defun solve-2 (input)
+  (loop for pos in (vmap-positions input)
+	for n = (vmap-digit-at input pos)
+	when (= n 0)
+	  sum (trail-count-2 input pos)))
+
+#+nil
+(solve-2 *sample*)
+ ; => 81 (7 bits, #x51, #o121, #b1010001)
+
+#+nil
+(solve-2 *input*)
+ ; => 1494 (11 bits, #x5D6)
