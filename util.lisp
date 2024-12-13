@@ -19,7 +19,13 @@
 	   #:int->digits
 	   #:digits->int
 	   #:vmap-digit-at
-	   #:vmap-neighbors-4))
+	   #:vmap-neighbors-4
+	   #:in-group-p
+	   #:merge-groups
+	   #:group-add
+	   #:group-new
+	   #:vmap-all-adjacent-pairs-4
+	   #:vmap-find-groups))
 
 (in-package :advent-of-code/util)
 
@@ -106,6 +112,84 @@
   (-> str string-lines (coerce 'vector)))
 
 
+(defun in-group-p (groups item &key (test #'eql))
+  (loop for group in groups
+	when (member item group :test test)
+	  return group))
+
+(defun merge-groups (groups group-a group-b)
+  (-<> groups
+    (remove group-a <> :test #'equal)
+    (remove group-b <> :test #'equal)
+    (group-new <> (union group-a group-b :test #'equal))))
+
+(defun group-add (groups group item)
+  (-<> groups
+    (remove group <> :test #'equal)
+    (group-new <> (push item group))))
+
+(defun group-new (groups items)
+  (push items groups))
+
+#+nil
+(-> nil
+  (group-new (list 1 2 3))
+  (group-new (list 4 5))
+  (group-add (list 4 5) 6)
+  (group-new (list 7 8 9))
+  (merge-groups (list 7 8 9) (list 1 2 3))
+  (in-group-p 2))
+
+
+#+nil
+(in-group-p (list (list 1 2 3) (list 4 5 6)) 4)
+
+(defun vmap-all-adjacent-pairs-4 (vmap)
+  (loop for y from 0 below (vmap-height vmap)
+	append (loop for x from 0 below (vmap-width vmap)
+		     when (< (1+ y) (vmap-height vmap))
+		       collect (list (cons x y)
+				     (cons x (1+ y)))
+		     when (< (1+ x) (vmap-width vmap))
+		       collect (list (cons x y)
+				     (cons (1+ x) y)))))
+
+(defun -vmap-group-pair (vmap pair groups)
+  (destructuring-bind (pos1 pos2)
+      pair
+    (let ((a (vmap-at vmap pos1))
+	  (b (vmap-at vmap pos2))
+	  (group-a (in-group-p groups pos1 :test #'equal))
+	  (group-b (in-group-p groups pos2 :test #'equal)))
+      (cond ((eql a b)
+	     (cond ((and group-a group-b (not (equal group-a group-b)))
+		    ;; a and b are in different groups, merge the groups
+		    (setf groups (merge-groups groups group-a group-b)))
+		   ((and group-a (not group-b))
+		    ;; if a and b are same but b is not in a group, add it to group a
+		    (setf groups (group-add groups group-a pos2)))
+		   ((and (not group-a) group-b)
+		    ;; if a and b are same but a is not in a group, add it to group b
+		    (setf groups (group-add groups group-b pos1)))
+		   ((and (not group-a) (not group-b))
+		    ;; if a and b are same but neither is in a group
+		    (setf groups (group-new groups (list pos1 pos2))))))
+	    (t
+	     ;; if a and b are different, make sure they are both in a group
+	     (unless group-a
+	       (setf groups (group-new groups (list pos1))))
+	     (unless group-b
+	       (setf groups (group-new groups (list pos2))))))))
+  groups)
+
+(defun vmap-find-groups (vmap)
+  (loop for pair in (vmap-all-adjacent-pairs-4 vmap)
+	for groups = (-vmap-group-pair vmap pair groups)
+	finally (return groups)))
+
+#+nil
+(vmap-all-adjacent-pairs-4 (vector (vector 1 2)
+				   (vector 3 4)))
 
 (defun make-set (&key (items nil) (test #'eql))
   (let ((ht (make-hash-table :test test)))
