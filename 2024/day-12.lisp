@@ -33,3 +33,10 @@ EEEC"))
 #+nil
 (solve-1 *input*)
  ; => 1352976 (21 bits, #x14A510)
+
+;; (defun sides (group)
+;;   )
+
+;; (defun solve-2 (input)
+;;   (loop for group in (vmap-find-groups input)
+;; 	sum (* (sides group) (parimeter group))))

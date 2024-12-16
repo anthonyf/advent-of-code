@@ -68,7 +68,6 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green")))
 (solve-1 *sample*)
 
 #+nil
-(print *input*)
 (solve-1 *input*)
 
 (defun lowest-possible (data)

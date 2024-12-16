@@ -69,10 +69,14 @@ zoneight234
   (loop for line in lines
 	sum (num line)))
 
+#+nil
 (solve-1 *sample*)
 
+#+nil
 (solve-1 *input*)
 
+#+nil
 (solve-2 *sample2*)
 
+#+nil
 (solve-2 *input*)
