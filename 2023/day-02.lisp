@@ -10,7 +10,7 @@
 
 
 (defun parse-line (line)
-  (declare (sb-ext:muffle-conditions style-warning))
+  #+sbcl (declare (sb-ext:muffle-conditions style-warning))
   (register-groups-bind (game right) ("^Game (\\d+):(.*)$" line)
     (let ((game (parse-integer game))
           (sets (->> right

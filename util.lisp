@@ -31,24 +31,23 @@
 
 (.env:load-env (asdf:system-relative-pathname "advent-of-code" "./.env"))
 
-(defvar *aoc-session* (uiop:getenv "AOC_SESSION_KEY"))
-
 (defun prompt-for-value (prompt)
   (format *query-io* prompt) ;; *query-io*: the special stream to make user queries.
   (force-output *query-io*)  ;; Ensure the user sees what he types.
   (list (read *query-io*)))
 
 (defun curl-input (year day)
-  (restart-case (assert *aoc-session*)
+  (let ((aoc-session (uiop:getenv "AOC_SESSION_KEY")))
+    (restart-case (assert aoc-session)
     (set-session-id (value)
       :report "Enter a new AoC session ID"
       :interactive (lambda () (prompt-for-value "Enter a new AoC session ID:"))
       (progn
-	(setf *aoc-session* value)
+	(setf aoc-session value)
 	(curl-input year day))))
-  (with-output-to-string (out)
-    (uiop:run-program (format nil "curl -s -H \"Cookie: session=~A\" \"https://adventofcode.com/~A/day/~A/input\"" *aoc-session* year day)
-		      :output out)))
+    (with-output-to-string (out)
+    (uiop:run-program (format nil "curl -s -H \"Cookie: session=~A\" \"https://adventofcode.com/~A/day/~A/input\"" aoc-session year day)
+		      :output out))))
 
 (defun input-string (year day)
   (curl-input year day))
