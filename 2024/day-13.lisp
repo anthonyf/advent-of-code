@@ -53,7 +53,7 @@ Prize: X=18641, Y=10279"))
 #+nil
 (parse-input *input*)
 
-(defun least-tokens (ax ay bx by px py)
+(defun least-tokens-brute-force (ax ay bx by px py)
   (loop
     named outer
     for aax from 0 by ax
@@ -74,10 +74,32 @@ Prize: X=18641, Y=10279"))
 
 (defun solve-1 (input)
   (loop for (ax ay bx by px py) in (parse-input input)
-	sum (least-tokens ax ay bx by px py)))
+	sum (least-tokens-brute-force ax ay bx by px py)))
 
 #+nil
 (solve-1 *sample*)
 
 #+nil
 (solve-1 *input*)
+
+(defun least-tokens (ax ay bx by px py)
+  (let* ((ca (/ (- (* px by) (* py bx))
+	       (- (* ax by) (* ay bx))))
+	 (cb (/ (- px (* ax ca))
+		bx)))
+    (loop for n in (list (* 3 ca) cb)
+	  when (and (integerp ca)
+		    (integerp cb))
+	    sum n)))
+
+(defun solve-2 (input)
+  (loop for (ax ay bx by lpx lpy) in (parse-input input)
+	for px = (+ 10000000000000 lpx)
+	for py = (+ 10000000000000 lpy)
+        sum (least-tokens ax ay bx by px py)))
+
+#+nil
+(solve-2 *sample*)
+
+#+nil
+(solve-2 *input*)
