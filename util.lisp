@@ -39,15 +39,15 @@
 (defun curl-input (year day)
   (let ((aoc-session (uiop:getenv "AOC_SESSION_KEY")))
     (restart-case (assert aoc-session)
-    (set-session-id (value)
-      :report "Enter a new AoC session ID"
-      :interactive (lambda () (prompt-for-value "Enter a new AoC session ID:"))
-      (progn
-	(setf aoc-session value)
-	(curl-input year day))))
+      (set-session-id (value)
+	:report "Enter a new AoC session ID"
+	:interactive (lambda () (prompt-for-value "Enter a new AoC session ID:"))
+	(progn
+	  (setf aoc-session value)
+	  (curl-input year day))))
     (with-output-to-string (out)
-    (uiop:run-program (format nil "curl -s -H \"Cookie: session=~A\" \"https://adventofcode.com/~A/day/~A/input\"" aoc-session year day)
-		      :output out))))
+      (uiop:run-program (format nil "curl -s -H \"Cookie: session=~A\" \"https://adventofcode.com/~A/day/~A/input\"" aoc-session year day)
+			:output out))))
 
 (defun input-string (year day)
   (curl-input year day))
