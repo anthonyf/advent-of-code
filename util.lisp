@@ -32,7 +32,8 @@
 (.env:load-env (asdf:system-relative-pathname "advent-of-code" "./.env"))
 
 (defun prompt-for-value (prompt)
-  (format *query-io* prompt) ;; *query-io*: the special stream to make user queries.
+  ;; *query-io*: the special stream to make user queries.
+  (format *query-io* prompt)
   (force-output *query-io*)  ;; Ensure the user sees what he types.
   (list (read *query-io*)))
 
@@ -41,7 +42,8 @@
     (restart-case (assert aoc-session)
       (set-session-id (value)
 	:report "Enter a new AoC session ID"
-	:interactive (lambda () (prompt-for-value "Enter a new AoC session ID:"))
+	:interactive (lambda ()
+		       (prompt-for-value "Enter a new AoC session ID:"))
 	(progn
 	  (setf aoc-session value)
 	  (curl-input year day))))
